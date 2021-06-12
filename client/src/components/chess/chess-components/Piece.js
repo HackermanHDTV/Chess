@@ -14,13 +14,23 @@ export default function Piece({ piece, i, j }) {
     unHighlightElement,
     toMove,
     deselectAll,
+    legalMoveObjects,
+    legalMoveElements,
+    selectedElement,
+    move,
   } = useChess()
 
   function handlePieceClick() {
     if (findColor(piece) === toMove) {
       setSelectedElement({ piece, i, j })
-    } else if (highlightedElements.includes(id)) {
+    } else if (legalMoveElements.includes(id)) {
       // major FEN Changes
+      const moveObj = legalMoveObjects.find(
+        (moveObj) =>
+          moveObj.move[0] === notation(selectedElement.j, selectedElement.i) &&
+          moveObj.move[1] === id
+      )
+      move(moveObj)
     } else {
       deselectAll()
     }

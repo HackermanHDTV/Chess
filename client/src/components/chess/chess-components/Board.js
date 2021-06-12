@@ -12,6 +12,9 @@ export default function Board() {
     highlightElement,
     highlightedElements,
     deselectAll,
+    move,
+    legalMoveObjects,
+    selectedElement,
   } = useChess()
 
   const boardRef = useRef()
@@ -25,11 +28,17 @@ export default function Board() {
   }
 
   function handleClick(id) {
-    if (!highlightedElements.includes(id)) {
+    if (!legalMoveElements.includes(id)) {
       deselectAll()
       return
     }
 
+    const moveObj = legalMoveObjects.find(
+      (moveObj) =>
+        moveObj.move[0] === notation(selectedElement.j, selectedElement.i) &&
+        moveObj.move[1] === id
+    )
+    move(moveObj)
     // Major Fen Change
   }
 
