@@ -1,0 +1,107 @@
+.details {
+  height: 60vw;
+  max-height: 600px;
+  width: 30vw;
+  max-width: 300px;
+  margin-left: 2rem;
+  border-radius: 3px;
+  box-shadow: 0 7px 7px black;
+  background-color: rgba(0, 0, 0, 0.4);
+
+  position: relative;
+
+  & .top-border {
+    font-size: 1.5rem;
+    color: $boardLight;
+    display: block;
+    width: 100%;
+    background-color: #1e1b42;
+
+    padding: 2px;
+    text-align: center;
+  }
+
+  & .grid-cont {
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr;
+    grid-auto-rows: minmax(min-content, max-content);
+    width: 100%;
+    & p {
+      color: $boardLight;
+      font-size: 1.2rem;
+      text-align: center;
+      padding: 3px;
+      background-color: #1e1b42;
+    }
+
+    & .btn {
+      color: $boardLight;
+      font-size: 1.2rem;
+      text-align: left;
+      padding: 3px;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $boardLight;
+        color: $boardDark;
+      }
+    }
+  }
+
+  & .controls {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    background-color: #120f35;
+    font-size: 2rem;
+
+    & .btn {
+      color: $boardLight;
+      position: relative;
+      & .vertical-line {
+        height: 30px;
+        width: 5px;
+        background-color: $controlButtonColor;
+      }
+      &.forward {
+        padding: 0 13px;
+        & .triangle-left {
+          width: 0;
+          height: 0;
+          border-top: 15px solid transparent;
+          border-right: 30px solid $controlButtonColor;
+          border-bottom: 15px solid transparent;
+        }
+      }
+
+      &.backward {
+        padding: 0 13px;
+        & .triangle-right {
+          width: 0;
+          height: 0;
+          border-top: 15px solid transparent;
+          border-left: 30px solid $controlButtonColor;
+          border-bottom: 15px solid transparent;
+        }
+      }
+
+      &:hover {
+        cursor: pointer;
+        background-color: $boardLight;
+        & .triangle-right {
+          border-left: 30px solid $controlButtonHoverColor;
+        }
+        & .triangle-left {
+          border-right: 30px solid $controlButtonHoverColor;
+        }
+
+        & .vertical-line {
+          background-color: $controlButtonHoverColor;
+        }
+      }
+    }
+  }
+}

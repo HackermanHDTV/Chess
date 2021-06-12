@@ -9,21 +9,25 @@ import idToCoordinates from '../moves/util/idToCoordinates'
 export default function Piece({ piece, i, j, boardRef }) {
   const id = notation(j, i)
   const {
-    setSelectedElement,
+    FEN,
+    selectElement,
     highlightElement,
     highlightedElements,
     unHighlightElement,
-    toMove,
+    // toMove,
     deselectAll,
     legalMoveObjects,
     legalMoveElements,
     selectedElement,
     move,
+    displayedFEN,
   } = useChess()
+
+  const toMove = displayedFEN.split(' ')[1]
 
   function handlePieceClick() {
     if (findColor(piece) === toMove) {
-      setSelectedElement({ piece, i, j })
+      selectElement({ piece, i, j }, FEN !== displayedFEN)
     } else if (legalMoveElements.includes(id)) {
       // major FEN Changes
       const moveObj = legalMoveObjects.find(
@@ -52,7 +56,7 @@ export default function Piece({ piece, i, j, boardRef }) {
       return
     }
     e.target.classList.add('dragging')
-    setSelectedElement({ piece, i, j })
+    selectElement({ piece, i, j }, FEN !== displayedFEN)
     setIsClicked(true)
     setStartLocation(id)
   }

@@ -3,11 +3,12 @@ import Piece from './Piece'
 import notation from '../moves/util/notation'
 
 import { useChess } from '../../contexts/ChessContext'
+import { parseFENPosition } from '../parseFen'
 
 export default function Board() {
   const {
     legalMoveElements,
-    position,
+    displayedFEN,
     unHighlightElement,
     highlightElement,
     highlightedElements,
@@ -16,6 +17,8 @@ export default function Board() {
     legalMoveObjects,
     selectedElement,
   } = useChess()
+
+  const position = parseFENPosition(displayedFEN)
 
   const boardRef = useRef()
 
@@ -58,7 +61,7 @@ export default function Board() {
                 />
               )
             }
-            return <React.Fragment key={rowIdx * colIdx}></React.Fragment>
+            return <React.Fragment key={100 + rowIdx * colIdx}></React.Fragment>
           })
         })}
         {position.map((row, rowIdx) => {

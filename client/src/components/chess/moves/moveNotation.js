@@ -3,7 +3,7 @@ export default function moveNotation(moveObj) {
     return moveObj.castleType
   }
   if (moveObj.isEnPassant) {
-    return `${moveObj.move[0]}x${moveObj.enPassantSquare}`
+    return `${moveObj.move[0].charAt(0)}x${moveObj.enPassantSquare}`
   }
   if (moveObj.isPawnMove) {
     if (moveObj.isCapture) {

@@ -26,7 +26,7 @@ export default function createFen(state) {
 
   let fen = `${positionToFen(state.position)} ${state.toMove} ${
     state.castlingRights
-  } ${state.enPassantSquare} ${state.fiftyMoveRuleCount} ${state.moveCount}`
+  } ${state.enPassantSquare} ${state.fiftyMoveCount} ${state.moveCount}`
 
   return fen
 }

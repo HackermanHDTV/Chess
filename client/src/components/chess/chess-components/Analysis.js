@@ -6,8 +6,10 @@ import Details from './Details'
 export default function Analysis() {
   return (
     <ChessProvider>
-      <Board />
-      <Details />
+      <div className='analysis'>
+        <Board />
+        <Details />
+      </div>
     </ChessProvider>
   )
 }
