@@ -30,6 +30,7 @@ export function UserProvider({ children }) {
       loggedInUserId !== 'null' &&
       loggedInUserId !== ''
     ) {
+      console.log(loggedInUserId)
       Axios.get(`http://localhost:5000/api/user`, {
         params: { id: loggedInUserId },
       })

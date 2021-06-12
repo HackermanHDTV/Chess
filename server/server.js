@@ -29,7 +29,15 @@ app.use(
   })
 )
 
-app.get('/api/user', (req, res) => {})
+app.get('/api/user', (req, res) => {
+  User.findById(req.query.id)
+    .then((doc) => {
+      res.status(200).send(doc)
+    })
+    .catch((err) => {
+      throw err
+    })
+})
 
 app.post('/api/login', (req, res) => {
   User.findOne({ username: req.body.username }, (err, doc) => {
