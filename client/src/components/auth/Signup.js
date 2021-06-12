@@ -4,6 +4,9 @@ import { Link, useHistory } from 'react-router-dom'
 
 import { useUser } from '../contexts/UserContext'
 
+import user from '../../assets/user.svg'
+import lock from '../../assets/lock.svg'
+
 export default function Login() {
   const usernameRef = useRef()
   const passwordRef = useRef()
@@ -24,20 +27,8 @@ export default function Login() {
     e.preventDefault()
     setIsLoading(true)
 
-    if (!usernameRef.current.value) {
-      setError('Please enter username')
-      setIsLoading(false)
-      return
-    }
-
     if (passwordRef.current.value !== confirmPasswordRef.current.value) {
       setError("Passwords don't match")
-      setIsLoading(false)
-      return
-    }
-
-    if (!passwordRef.current.value) {
-      setError('Please enter password')
       setIsLoading(false)
       return
     }
@@ -61,28 +52,41 @@ export default function Login() {
         setIsLoading(false)
       })
   }
+
   return (
-    <form onSubmit={handleSubmit}>
-      <div>Sign Up</div>
-      {error && <div>{error}</div>}
-      <div>
-        <label>Username</label>
-        <input ref={usernameRef} />
-      </div>
-      <div>
-        <label>Password</label>
-        <input type='password' ref={passwordRef} />
-      </div>
-      <div>
-        <label>Confirm Password</label>
-        <input type='password' ref={confirmPasswordRef} />
-      </div>
-      <button disabled={isLoading} type='submit'>
-        Sign Up
-      </button>
-      <div>
-        Already have an account?<Link to='/login'>Log In</Link>
-      </div>
-    </form>
+    <div className='signup-form'>
+      <form onSubmit={handleSubmit}>
+        <span>Sign Up</span>
+        {error && <div>{error}</div>}
+        <div className='input-cont'>
+          <img src={user} alt='' />
+          <input ref={usernameRef} placeholder='Username' required />
+        </div>
+        <div className='input-cont'>
+          <img src={lock} alt='' />
+          <input
+            type='password'
+            ref={passwordRef}
+            placeholder='Password'
+            required
+          />
+        </div>
+        <div className='input-cont'>
+          <img src={lock} alt='' />
+          <input
+            type='password'
+            ref={confirmPasswordRef}
+            placeholder='Confirm Password'
+            required
+          />
+        </div>
+        <button disabled={isLoading} type='submit'>
+          Sign Up
+        </button>
+        <div className='prompt'>
+          Already have an account?<Link to='/login'> Log In</Link>
+        </div>
+      </form>
+    </div>
   )
 }

@@ -4,6 +4,9 @@ import { Link, useHistory } from 'react-router-dom'
 
 import { useUser } from '../contexts/UserContext'
 
+import user from '../../assets/user.svg'
+import lock from '../../assets/lock.svg'
+
 export default function Login() {
   const usernameRef = useRef()
   const passwordRef = useRef()
@@ -43,23 +46,30 @@ export default function Login() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>Login</div>
-      {error && <div>{error}</div>}
-      <div>
-        <label>Username</label>
-        <input ref={usernameRef} />
-      </div>
-      <div>
-        <label>Password</label>
-        <input type='password' ref={passwordRef} />
-      </div>
-      <button disabled={isLoading} type='submit'>
-        Log In
-      </button>
-      <div>
-        Don't have an account?<Link to='/signup'>Sign up</Link>
-      </div>
-    </form>
+    <div className='login-form'>
+      <form onSubmit={handleSubmit}>
+        <span>Log In</span>
+        {error && <div>{error}</div>}
+        <div className='input-cont'>
+          <img src={user} alt='' />
+          <input ref={usernameRef} placeholder='Username' required />
+        </div>
+        <div className='input-cont'>
+          <img src={lock} alt='' />
+          <input
+            type='password'
+            ref={passwordRef}
+            placeholder='Password'
+            required
+          />
+        </div>
+        <button disabled={isLoading} type='submit'>
+          Log In
+        </button>
+        <div className='prompt'>
+          Don't have an account?<Link to='/signup'> Sign up</Link>
+        </div>
+      </form>
+    </div>
   )
 }
