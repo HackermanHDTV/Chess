@@ -4,6 +4,7 @@ import Login from './auth/Login'
 import Signup from './auth/Signup'
 import Dashboard from './dashboard/Dashboard'
 import PrivateRoute from './PrivateRoute'
+import PublicRoute from './PublicRoute'
 import { UserProvider } from './contexts/UserContext'
 import '../scss/styles.scss'
 
@@ -12,8 +13,8 @@ export default function App() {
     <Router>
       <Switch>
         <UserProvider>
-          <Route path='/login' component={Login} />
-          <Route path='/signup' component={Signup} />
+          <PublicRoute path='/login' component={Login} />
+          <PublicRoute path='/signup' component={Signup} />
           <PrivateRoute path='/' exact component={Dashboard} />
         </UserProvider>
       </Switch>
