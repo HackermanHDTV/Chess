@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import Axios from 'axios'
 import { Link, useHistory } from 'react-router-dom'
 
@@ -16,6 +16,10 @@ export default function Login() {
 
   const { setLocalUser } = useUser()
   const history = useHistory()
+
+  useEffect(() => {
+    usernameRef.current.focus()
+  }, [])
 
   function clearFields() {
     usernameRef.current.value = ''
@@ -57,7 +61,7 @@ export default function Login() {
     <div className='signup-form'>
       <form onSubmit={handleSubmit}>
         <span>Sign Up</span>
-        {error && <div>{error}</div>}
+        {error && <div className='error'>{error}</div>}
         <div className='input-cont'>
           <img src={user} alt='' />
           <input ref={usernameRef} placeholder='Username' required />

@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap');
+
+.header {
+  & nav {
+    background-color: $darkBlue;
+    padding: 1rem 1.5rem;
+  }
+  & img {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 7px;
+    background-size: cover;
+    background-image: url('../assets/logo.jpeg');
+  }
+  &__logo {
+    &:hover {
+      cursor: pointer;
+    }
+
+    & .text {
+      color: #a9a9cc;
+      font-family: 'Zen Dots', cursive;
+      font-size: 2.5rem;
+    }
+  }
+
+  &__menu {
+    &:hover {
+      cursor: pointer;
+    }
+    & span {
+      display: block;
+      width: 26px;
+      height: 2px;
+      background-color: grey;
+      border-radius: 3px;
+
+      &:not(:last-child) {
+        margin-bottom: 3px;
+      }
+    }
+  }
+
+  &__links {
+    width: 40%;
+    & li {
+      list-style: none;
+      position: relative;
+      transition: color 150ms ease-in-out;
+      &:not(:last-child) {
+        margin-right: 40px;
+      }
+
+      &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        height: 5px;
+        left: 0;
+        right: 0;
+        bottom: -30px;
+        background: linear-gradient(to right, $limeGreen, $brightCyan);
+        opacity: 0;
+        transition: opacity 150ms ease-in-out;
+      }
+
+      &:hover {
+        color: $lighterBlue;
+
+        &::before {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  &__button {
+    font-size: 1.3rem;
+    text-decoration: none;
+    color: $grayishBlue;
+    background-color: #343854;
+    padding: 14px 35px;
+    border-radius: 50px;
+    transition: display 150ms ease-in-out;
+
+    &:hover {
+      cursor: pointer;
+      background-color: #404361;
+      color: $lightGrayishBlue;
+    }
+  }
+}

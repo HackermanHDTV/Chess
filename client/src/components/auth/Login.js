@@ -1,10 +1,10 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import Axios from 'axios'
 import { Link, useHistory } from 'react-router-dom'
 
 import { useUser } from '../contexts/UserContext'
 
-import user from '../../assets/user.svg'
+import userLogo from '../../assets/user.svg'
 import lock from '../../assets/lock.svg'
 
 export default function Login() {
@@ -15,6 +15,10 @@ export default function Login() {
 
   const { setLocalUser } = useUser()
   const history = useHistory()
+
+  useEffect(() => {
+    usernameRef.current.focus()
+  }, [])
 
   function clearFields() {
     usernameRef.current.value = ''
@@ -49,9 +53,9 @@ export default function Login() {
     <div className='login-form'>
       <form onSubmit={handleSubmit}>
         <span>Log In</span>
-        {error && <div>{error}</div>}
+        {error && <div className='error'>{error}</div>}
         <div className='input-cont'>
-          <img src={user} alt='' />
+          <img src={userLogo} alt='' />
           <input ref={usernameRef} placeholder='Username' required />
         </div>
         <div className='input-cont'>

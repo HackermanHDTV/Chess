@@ -11,3 +11,43 @@
   height: 100vh;
   background: linear-gradient(to right, #0f5298, #3c99dc, #0f5298);
 }
+
+//Flexbox
+.flex {
+  display: flex;
+
+  &-jc-c {
+    justify-content: center;
+  }
+
+  &-jc-sb {
+    justify-content: space-between;
+  }
+  &-jc-sa {
+    justify-content: space-around;
+  }
+
+  &-ai-c {
+    align-items: center;
+  }
+}
+
+// links
+a {
+  font-size: 1.3rem;
+  text-decoration: none;
+  color: $grayishBlue;
+}
+
+// Visibility
+.hide-for-mobile {
+  @include breakpoint-down(medium) {
+    display: none;
+  }
+}
+
+.hide-for-desktop {
+  @include breakpoint-up(large) {
+    display: none;
+  }
+}
