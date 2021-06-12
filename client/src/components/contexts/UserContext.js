@@ -25,11 +25,12 @@ export function UserProvider({ children }) {
   useEffect(() => {
     const loggedInUserId = localStorage.getItem('userid')
     if (
+      loggedInUserId &&
       loggedInUserId !== 'undefined' &&
       loggedInUserId !== 'null' &&
       loggedInUserId !== ''
     ) {
-      Axios.get(`http://localhost:5000/user`, {
+      Axios.get(`http://localhost:5000/api/user`, {
         params: { id: loggedInUserId },
       })
         .then((res) => {
