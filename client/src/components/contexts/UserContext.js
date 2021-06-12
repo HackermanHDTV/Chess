@@ -30,9 +30,10 @@ export function UserProvider({ children }) {
       loggedInUserId !== 'null' &&
       loggedInUserId !== ''
     ) {
-      console.log(loggedInUserId)
-      Axios.get(`http://localhost:5000/api/user`, {
+      Axios({
+        method: 'GET',
         params: { id: loggedInUserId },
+        url: `http://192.168.1.9:5000/api/user`,
       })
         .then((res) => {
           setUser(res.data)
@@ -40,7 +41,7 @@ export function UserProvider({ children }) {
         })
         .catch((e) => console.error(e))
     }
-  }, [])
+  }, [history])
 
   const value = {
     user,

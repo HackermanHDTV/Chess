@@ -2,9 +2,10 @@ import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Login from './auth/Login'
 import Signup from './auth/Signup'
-import Dashboard from './Dashboard'
+import Dashboard from './dashboard/Dashboard'
 import PrivateRoute from './PrivateRoute'
 import { UserProvider } from './contexts/UserContext'
+import '../scss/styles.scss'
 
 export default function App() {
   return (

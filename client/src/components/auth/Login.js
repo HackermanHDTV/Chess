@@ -8,6 +8,7 @@ export default function Login() {
   const usernameRef = useRef()
   const passwordRef = useRef()
   const [error, setError] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
   const { setLocalUser } = useUser()
   const history = useHistory()
@@ -19,10 +20,11 @@ export default function Login() {
 
   function handleSubmit(e) {
     e.preventDefault()
+    setIsLoading(true)
 
     Axios({
       method: 'POST',
-      url: 'http://localhost:5000/api/login',
+      url: 'http://192.168.1.9:5000/api/login',
       data: {
         username: usernameRef.current.value,
         password: passwordRef.current.value,
@@ -34,9 +36,12 @@ export default function Login() {
       })
       .catch((err) => {
         setError('Could not log in')
+        clearFields()
+        setIsLoading(false)
         console.error(err)
       })
   }
+
   return (
     <form onSubmit={handleSubmit}>
       <div>Login</div>
@@ -47,11 +52,13 @@ export default function Login() {
       </div>
       <div>
         <label>Password</label>
-        <input type="password" ref={passwordRef} />
+        <input type='password' ref={passwordRef} />
       </div>
-      <button type="submit">Log In</button>
+      <button disabled={isLoading} type='submit'>
+        Log In
+      </button>
       <div>
-        Don't have an account?<Link to="/signup">Sign up</Link>
+        Don't have an account?<Link to='/signup'>Sign up</Link>
       </div>
     </form>
   )

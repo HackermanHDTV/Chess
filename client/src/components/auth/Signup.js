@@ -9,6 +9,7 @@ export default function Login() {
   const passwordRef = useRef()
   const confirmPasswordRef = useRef()
   const [error, setError] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
   const { setLocalUser } = useUser()
   const history = useHistory()
@@ -21,14 +22,29 @@ export default function Login() {
 
   function handleSubmit(e) {
     e.preventDefault()
+    setIsLoading(true)
+
+    if (!usernameRef.current.value) {
+      setError('Please enter username')
+      setIsLoading(false)
+      return
+    }
 
     if (passwordRef.current.value !== confirmPasswordRef.current.value) {
       setError("Passwords don't match")
+      setIsLoading(false)
       return
     }
+
+    if (!passwordRef.current.value) {
+      setError('Please enter password')
+      setIsLoading(false)
+      return
+    }
+
     Axios({
       method: 'POST',
-      url: 'http://localhost:5000/api/signup',
+      url: 'http://192.168.1.9:5000/api/signup',
       data: {
         username: usernameRef.current.value,
         password: passwordRef.current.value,
@@ -40,8 +56,9 @@ export default function Login() {
       })
       .catch((err) => {
         setError('Could not sign up')
-
+        clearFields()
         console.error(err)
+        setIsLoading(false)
       })
   }
   return (
@@ -54,15 +71,17 @@ export default function Login() {
       </div>
       <div>
         <label>Password</label>
-        <input type="password" ref={passwordRef} />
+        <input type='password' ref={passwordRef} />
       </div>
       <div>
         <label>Confirm Password</label>
-        <input type="password" ref={confirmPasswordRef} />
+        <input type='password' ref={confirmPasswordRef} />
       </div>
-      <button type="submit">Sign Up</button>
+      <button disabled={isLoading} type='submit'>
+        Sign Up
+      </button>
       <div>
-        Already have an account?<Link to="/login">Log In</Link>
+        Already have an account?<Link to='/login'>Log In</Link>
       </div>
     </form>
   )
