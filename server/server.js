@@ -1,85 +1,46 @@
 const express = require('express')
 const cors = require('cors')
 const app = express()
-const bcrypt = require('bcrypt')
+
 const http = require('http')
 require('dotenv').config()
 const server = http.createServer(app)
 const port = 5000
 const mongoose = require('mongoose')
-const User = require('./Schema/User.js')
+// const User = require('./Schema/User.js')
+const PGN = require('./Schema/PGN.js')
+const { userSignUp, userLogin, getUser } = require('./util/AuthRoutes.js')
+const { getPGN, savePGN } = require('./util/PGNroute.js')
 
 mongoose.connect(
-  process.env.MONGODB_SRV,
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  },
-  () => {
-    console.log('Mongoose connected!')
-  }
+	process.env.MONGODB_SRV,
+	{
+		useNewUrlParser: true,
+		useUnifiedTopology: true,
+	},
+	() => {
+		console.log('Mongoose connected!')
+	}
 )
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(
-  cors({
-    origin: 'http://localhost:3000',
-    credentials: true,
-  })
+	cors({
+		origin: 'http://192.168.1.38:3000',
+		credentials: true,
+	})
 )
 
-app.get('/api/user', (req, res) => {
-  User.findById(req.query.id)
-    .then((doc) => {
-      res.status(200).send(doc)
-    })
-    .catch((err) => {
-      throw err
-    })
-})
+// Auth routes
+app.post('/api/login', userLogin)
+app.post('/api/signup', userSignUp)
+app.post('/api/user', getUser)
 
-app.post('/api/login', (req, res) => {
-  User.findOne({ username: req.body.username }, (err, doc) => {
-    if (err) {
-      throw err
-    }
-    if (!doc) {
-      res.status(500).send('Invalid!!')
-    } else {
-      bcrypt.compare(req.body.password, doc.password, (err, result) => {
-        if (err) {
-          throw err
-        }
-        if (result) {
-          res.status(200).send(doc)
-        } else {
-          res.status(500).send('Invalid!!')
-        }
-      })
-    }
-  })
-})
+// PGN routes
+app.get('/api/getPGN/:id', getPGN)
+app.post('/api/postPGN', savePGN)
 
-app.post('/api/signup', (req, res) => {
-  User.findOne({ username: req.body.username }, async (err, doc) => {
-    if (err) {
-      throw err
-    }
-    if (doc) {
-      res.status(422).send('username in use!')
-    } else {
-      const newUser = User({
-        username: req.body.username,
-        password: await bcrypt.hash(req.body.password, 10),
-      })
-
-      await newUser.save()
-      res.status(200).send(newUser)
-    }
-  })
-})
-
-server.listen(port, () => {
-  console.log(`Server is listening on port ${port}`)
+server.listen(port, '0.0.0.0', () => {
+	console.log(`Server is listening on port ${port}`)
 })
