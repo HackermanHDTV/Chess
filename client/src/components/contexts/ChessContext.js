@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import legalMoves from '../chess/moves/pieceMoves/legalMoves'
 import notation from '../chess/moves/util/notation'
-import parseFen, { parseFENPosition } from '../chess/parseFen'
+import { parseFENPosition } from '../chess/parseFen'
 import newPosition from '../chess/newPosition'
 import createFen from '../chess/moves/util/createFen'
 import isMate from '../chess/moves/isMate'

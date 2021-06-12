@@ -54,6 +54,7 @@ export default function Board() {
                   piece={square}
                   i={rowIdx}
                   j={colIdx}
+                  boardRef={boardRef}
                 />
               )
             }

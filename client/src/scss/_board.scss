@@ -16,6 +16,7 @@
 
   & .square {
     position: relative;
+
     &::before {
       content: '';
       position: absolute;
@@ -82,5 +83,12 @@
 
     position: absolute;
     z-index: 2;
+    &.dragging {
+      z-index: 5;
+    }
+
+    &:not(.dragging) {
+      transition: transform 250ms ease;
+    }
   }
 }
