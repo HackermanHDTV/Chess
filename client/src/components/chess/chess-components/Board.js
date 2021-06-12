@@ -58,6 +58,7 @@ export default function Board() {
                 />
               )
             }
+            return <React.Fragment key={rowIdx * colIdx}></React.Fragment>
           })
         })}
         {position.map((row, rowIdx) => {

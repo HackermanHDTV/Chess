@@ -77,6 +77,7 @@ export function ChessProvider({ children }) {
         castlingRights,
       })
     )
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [toMove])
 
   useEffect(() => {
@@ -85,6 +86,7 @@ export function ChessProvider({ children }) {
     } else if (isMate(FEN) === 'Stalemate') {
       alert('Draw by stalemate')
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [FEN])
 
   useEffect(() => {
@@ -106,6 +108,7 @@ export function ChessProvider({ children }) {
       })
     )
     setHighlightedElements([])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedElement])
 
   const value = {

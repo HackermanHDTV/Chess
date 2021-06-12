@@ -4,7 +4,6 @@ import pieces from './pieces'
 import { useChess } from '../../contexts/ChessContext'
 import notation from '../moves/util/notation'
 import findColor from '../moves/util/findColor'
-import findPosition from './findPosition'
 import idToCoordinates from '../moves/util/idToCoordinates'
 
 export default function Piece({ piece, i, j, boardRef }) {
