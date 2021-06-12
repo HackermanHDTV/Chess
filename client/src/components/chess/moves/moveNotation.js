@@ -12,7 +12,7 @@ export default function moveNotation(moveObj) {
     return moveObj.move[1]
   }
   if (moveObj.isCapture) {
-    return `${moveObj.move[0]}x${moveObj.move[1]}`
+    return `${moveObj.piece}x${moveObj.move[1]}`
   }
   return `${moveObj.piece.toUpperCase()}${moveObj.move[1]}`
 }

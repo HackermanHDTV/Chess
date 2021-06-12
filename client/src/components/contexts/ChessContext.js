@@ -4,6 +4,8 @@ import notation from '../chess/moves/util/notation'
 import parseFen, { parseFENPosition } from '../chess/parseFen'
 import newPosition from '../chess/newPosition'
 import createFen from '../chess/moves/util/createFen'
+import isMate from '../chess/moves/isMate'
+import moveNotation from '../chess/moves/moveNotation'
 
 const ChessContext = React.createContext()
 
@@ -27,6 +29,8 @@ export function ChessProvider({ children }) {
   const [enPassantSquare, setEnPassantSquare] = useState('-')
   const [moveCount, setMoveCount] = useState(0)
   const [fiftyMoveCount, setFiftyMoveCount] = useState(0)
+
+  const [moveList, setMoveList] = useState([])
 
   function highlightElement(id) {
     setHighlightedElements([...highlightedElements, id])
@@ -54,8 +58,11 @@ export function ChessProvider({ children }) {
     }
     setPosition(resultingPosition)
     setCastlingRights(moveObj.castlingRights || castlingRights)
-    setEnPassantSquare(moveObj.enPassantSquare || '-')
+    setEnPassantSquare(moveObj.newEnPassantSquare || '-')
     setToMove(toMove === 'w' ? 'b' : 'w')
+
+    setMoveList([...moveList, moveNotation(moveObj)])
+
     deselectAll()
   }
 
@@ -71,6 +78,14 @@ export function ChessProvider({ children }) {
       })
     )
   }, [toMove])
+
+  useEffect(() => {
+    if (isMate(FEN) === 'Checkmate') {
+      alert(`${toMove === 'w' ? 'Black' : 'White'} won by Checkmate`)
+    } else if (isMate(FEN) === 'Stalemate') {
+      alert('Draw by stalemate')
+    }
+  }, [FEN])
 
   useEffect(() => {
     if (!selectedElement) {
@@ -108,6 +123,7 @@ export function ChessProvider({ children }) {
     deselectAll,
     legalMoveObjects,
     move,
+    moveList,
   }
   return <ChessContext.Provider value={value}>{children}</ChessContext.Provider>
 }

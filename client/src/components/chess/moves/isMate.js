@@ -1,5 +1,6 @@
-import legalMoves from './legalMoves'
+import legalMoves from './pieceMoves/legalMoves'
 import isInCheck from './isInCheck'
+import parseFen from '../parseFen'
 
 export default function isMate(FEN) {
   function parseFENPosition(FEN) {
@@ -44,7 +45,16 @@ export default function isMate(FEN) {
   position.forEach((row, idx1) => {
     row.forEach((square, idx2) => {
       if (square !== '' && findColor(square) === toMove) {
-        moves = moves.concat(legalMoves(FEN, id(idx2, idx1)))
+        const values = parseFen(FEN)
+        moves = moves.concat(
+          legalMoves(
+            values.position,
+            values.toMove,
+            values.castlingRights,
+            values.enPassantSquare,
+            id(idx2, idx1)
+          )
+        )
       }
     })
   })

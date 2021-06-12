@@ -19,7 +19,7 @@ export function parseFENPosition(FEN) {
 export default function parseFen(fen) {
   return {
     position: parseFENPosition(fen.split(' ')[0]),
-    colorToMove: fen.split(' ')[1],
+    toMove: fen.split(' ')[1],
     castlingRights: fen.split(' ')[2],
     enPassantSquare: fen.split(' ')[3],
     fiftyMoveRuleCount: parseInt(fen.split(' ')[4]),
