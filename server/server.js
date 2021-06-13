@@ -4,11 +4,19 @@ const http = require('http')
 require('dotenv').config()
 const port = 5000
 const mongoose = require('mongoose')
-const { userSignUp, userLogin, getUser } = require('./util/AuthRoutes.js')
-const { getPGN, savePGN } = require('./util/PGNroute.js')
-
 const app = express()
 const server = http.createServer(app)
+const { Server } = require('socket.io')
+const io = new Server(server, {
+	cors: {
+		origin: '*',
+	},
+})
+
+const { v4 } = require('uuid')
+
+const { userSignUp, userLogin, getUser } = require('./util/AuthRoutes.js')
+const { getPGN, savePGN } = require('./util/PGNroute.js')
 
 mongoose.connect(
 	process.env.MONGODB_SRV,
@@ -20,6 +28,33 @@ mongoose.connect(
 		console.log('Mongoose connected!')
 	}
 )
+
+let availableRoom
+
+io.on('connection', (socket) => {
+	console.log('socket connected!')
+
+	socket.on('join-room', () => {
+		if (availableRoom) {
+			socket.join(availableRoom)
+
+			io.to(socket.id).emit('init', availableRoom, 'b')
+			io.to(availableRoom).emit('begin')
+
+			availableRoom = null
+		} else {
+			availableRoom = v4()
+
+			socket.join(availableRoom)
+
+			io.to(socket.id).emit('init', availableRoom, 'w')
+		}
+	})
+
+	socket.on('move', (roomID, moveObj) => {
+		socket.broadcast.to(roomID).emit('make-move', moveObj)
+	})
+})
 
 // middleware
 app.use(express.json())
