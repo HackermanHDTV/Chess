@@ -1,0 +1,9 @@
+.dashboard {
+  margin-top: 50px;
+  font-size: 3rem;
+
+  & * {
+    margin: 20px auto; 
+    width: fit-content;
+  }
+}
