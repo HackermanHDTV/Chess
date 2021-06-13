@@ -13,7 +13,6 @@ import PlayLocal from './chess/chess-components/PlayLocal'
 import Analysis from './chess/chess-components/Analysis'
 import Profile from './dashboard/Profile'
 import { ChessProvider } from './contexts/ChessContext'
-import { SocketProvider } from './contexts/SocketContext'
 import PrivateSocket from './routes/PrivateSocket'
 
 export default function App() {

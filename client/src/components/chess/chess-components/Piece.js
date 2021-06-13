@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import pieces from './pieces'
 
 import { useChess } from '../../contexts/ChessContext'
@@ -9,6 +9,7 @@ import idToCoordinates from '../moves/util/idToCoordinates'
 export default function Piece({ piece, i, j, boardRef }) {
   const id = notation(j, i)
   const { state, dispatch } = useChess()
+  const pieceRef = useRef()
 
   const toMove = state.displayedFEN.split(' ')[1]
 
@@ -107,8 +108,8 @@ export default function Piece({ piece, i, j, boardRef }) {
     if (isClicked) {
       let mouseX = e.clientX - boardX
       let mouseY = e.clientY - boardY
-      let x = mouseX - 37.5
-      let y = mouseY - 37.5
+      let x = mouseX - pieceRef.current.width / 2
+      let y = mouseY - pieceRef.current.width / 2
       element.style.transform = `translate(${x}px,${y}px)`
     }
   }
@@ -132,6 +133,7 @@ export default function Piece({ piece, i, j, boardRef }) {
       onMouseDown={mouseDown}
       onMouseUp={mouseUp}
       onMouseMove={mouseMove}
+      ref={pieceRef}
     />
   )
 }

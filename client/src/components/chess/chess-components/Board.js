@@ -42,6 +42,7 @@ export default function Board() {
     <>
       <div className='board' ref={boardRef}>
         {position.map((row, rowIdx) => {
+          // eslint-disable-next-line array-callback-return
           return row.map((square, colIdx) => {
             if (square) {
               return (

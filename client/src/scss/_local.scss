@@ -1,0 +1,32 @@
+.local {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__board {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & .time {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 10vw;
+      height: 3vw;
+      font-size: 2vw;
+
+      color: white;
+      background-color: #2a3a98a1;
+      border-radius: 10px;
+      margin: 10px;
+      &.black {
+        align-self: flex-start;
+      }
+      &.white {
+        align-self: flex-end;
+      }
+    }
+  }
+}

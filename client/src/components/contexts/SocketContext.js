@@ -12,15 +12,26 @@ export function useSocket() {
 
 export function SocketProvider({ children }) {
   const { user } = useUser()
-  const { dispatch } = useChess()
+  const { dispatch, state } = useChess()
   const [socket, setSocket] = useState()
   const [roomID, setRoomID] = useState()
   const [isLoading, setIsLoading] = useState(false)
 
   function playMove(moveObj) {
     console.log('emitting move to server...')
+    dispatch({ type: 'emitted' })
     socket.emit('move', roomID, moveObj)
   }
+
+  useEffect(() => {
+    if (!state.played) {
+      return
+    }
+    if (state.played === true) {
+      playMove(state.latestMoveObj)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state.played])
 
   useEffect(() => {
     const newSocket = io('http://192.168.1.9:5000', { query: { id: user._id } })
@@ -43,7 +54,6 @@ export function SocketProvider({ children }) {
         type: 'init',
         payload: { type: 'online', emitMove: playMove, onlineColor: color },
       })
-      // dispatch({ type: 'set-online-color', payload: { color } })
     })
 
     socket.on('begin', () => {
