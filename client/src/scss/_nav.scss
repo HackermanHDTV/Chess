@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap");
 
 .header {
   & nav {
@@ -10,7 +10,7 @@
     height: 2.5rem;
     border-radius: 7px;
     background-size: cover;
-    background-image: url('../assets/logo.jpeg');
+    background-image: url("../assets/logo.jpeg");
   }
   &__logo {
     &:hover {
@@ -19,7 +19,7 @@
 
     & .text {
       color: #a9a9cc;
-      font-family: 'Zen Dots', cursive;
+      font-family: "Zen Dots", cursive;
       font-size: 2.5rem;
     }
   }
@@ -41,6 +41,26 @@
     }
   }
 
+  position: relative;
+  &__dropdown {
+    z-index: 100;
+    background-color: $darkBlue;
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    right: 50%;
+    transform: translateX(50%);
+
+    display: flex;
+    justify-content: center;
+
+    & ul {
+      text-align: center;
+
+      list-style-type: none;
+    }
+  }
+
   &__links {
     width: 40%;
     & li {
@@ -52,7 +72,7 @@
       }
 
       &::before {
-        content: '';
+        content: "";
         display: block;
         position: absolute;
         height: 5px;

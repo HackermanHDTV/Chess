@@ -1,11 +1,14 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { useUser } from './contexts/UserContext'
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { useUser } from "./contexts/UserContext";
 
-import logo from '../assets/logo.jpeg'
+import logo from "../assets/logo.jpeg";
 
 export default function Header() {
-  const { user, logout } = useUser()
+  const { user, logout } = useUser();
+
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <header className='header'>
       <nav className='flex flex-ai-c flex-jc-sb'>
@@ -15,8 +18,31 @@ export default function Header() {
             <div className='text'>Chess</div>
           </div>
         </Link>
+        {isOpen && (
+          <div className='header__dropdown'>
+            <ul>
+              <ul className='dropdown__links hide-for-desktop'>
+                <Link to='/play-online'>
+                  <li>Play Online</li>
+                </Link>
+                <Link to='/play-local'>
+                  <li>Pass & Play</li>
+                </Link>
+                <Link to='/analysis'>
+                  <li>Analysis Board</li>
+                </Link>
+                <Link to='/profile'>
+                  <li>Profile</li>
+                </Link>
+              </ul>
+            </ul>
+          </div>
+        )}
 
-        <div className='header__menu hide-for-desktop'>
+        <div
+          className='header__menu hide-for-desktop'
+          onClick={() => setIsOpen(!isOpen)}
+        >
           <span></span>
           <span></span>
           <span></span>
@@ -36,7 +62,6 @@ export default function Header() {
             <li>Profile</li>
           </Link>
         </ul>
-
         {user ? (
           <div
             onClick={() => logout()}
@@ -51,5 +76,5 @@ export default function Header() {
         )}
       </nav>
     </header>
-  )
+  );
 }
