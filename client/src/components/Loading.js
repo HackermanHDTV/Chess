@@ -1,5 +1,10 @@
-import React from 'react'
+import React from "react";
+import loading from "../assets/loading.svg";
 
 export default function Loading() {
-	return <div>Loading</div>
+  return (
+    <div className='loading'>
+      <img src={loading} className='App-logo' alt='logo' />
+    </div>
+  );
 }
