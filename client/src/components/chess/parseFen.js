@@ -17,13 +17,14 @@ export function parseFENPosition(FEN) {
 }
 
 export default function parseFen(fen) {
+  const values = fen.split(' ')
   return {
-    position: parseFENPosition(fen.split(' ')[0]),
-    toMove: fen.split(' ')[1],
-    castlingRights: fen.split(' ')[2],
-    enPassantSquare: fen.split(' ')[3],
-    fiftyMoveRuleCount: parseInt(fen.split(' ')[4]),
-    moveCount: parseInt(fen.split(' ')[5]),
+    position: parseFENPosition(fen),
+    toMove: values[1],
+    castlingRights: values[2],
+    enPassantSquare: values[3],
+    fiftyMoveRuleCount: parseInt(values[4]),
+    moveCount: parseInt(values[5]),
     moves: [],
     legalMoveElements: [],
     selectedElement: null,

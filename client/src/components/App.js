@@ -12,6 +12,9 @@ import PlayOnline from './chess/chess-components/PlayOnline'
 import PlayLocal from './chess/chess-components/PlayLocal'
 import Analysis from './chess/chess-components/Analysis'
 import Profile from './dashboard/Profile'
+import { ChessProvider } from './contexts/ChessContext'
+import { SocketProvider } from './contexts/SocketContext'
+import PrivateSocket from './routes/PrivateSocket'
 
 export default function App() {
   return (
@@ -19,15 +22,15 @@ export default function App() {
       <Router>
         <Switch>
           <UserProvider>
-            {/* <Route path='/login' component={Login} />
-            <Route path='/signup' component={Signup} /> */}
             <PublicRoute path='/login' component={Login} />
             <PublicRoute path='/signup' component={Signup} />
             <NavRoute path='/' exact component={Dashboard} />
             <PrivateRoute path='/profile' exact component={Profile} />
-            <PrivateRoute path='/play-online' component={PlayOnline} />
-            <PrivateRoute path='/play-local' component={PlayLocal} />
-            <PrivateRoute path='/analysis' component={Analysis} />
+            <ChessProvider>
+              <PrivateSocket path='/play-online' component={PlayOnline} />
+              <PrivateRoute path='/play-local' component={PlayLocal} />
+              <PrivateRoute path='/analysis' component={Analysis} />
+            </ChessProvider>
           </UserProvider>
         </Switch>
       </Router>

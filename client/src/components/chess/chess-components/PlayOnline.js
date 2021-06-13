@@ -1,16 +1,19 @@
 import React from 'react'
-import { ChessProvider } from '../../contexts/ChessContext'
-import { SocketProvider } from '../../contexts/SocketContext'
+import { useChess } from '../../contexts/ChessContext'
 import Board from './Board'
 import Details from './Details'
 
 export default function PlayOnline() {
-	return (
-		<ChessProvider>
-			<SocketProvider>
-				<Board />
-				<Details isAnalysis={false} />
-			</SocketProvider>
-		</ChessProvider>
-	)
+  const { state } = useChess()
+
+  return (
+    <div className='online'>
+      {state.onlineColor && (
+        <>
+          <Board />
+          <Details isAnalysis={false} />
+        </>
+      )}
+    </div>
+  )
 }
