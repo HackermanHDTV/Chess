@@ -20,7 +20,7 @@ export function SocketProvider({ children }) {
   function playMove(moveObj) {
     console.log('emitting move to server...')
     dispatch({ type: 'emitted' })
-    socket.emit('move', roomID, moveObj)
+    socket?.emit('move', roomID, moveObj)
   }
 
   useEffect(() => {
