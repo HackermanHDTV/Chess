@@ -1,9 +1,9 @@
-import React from "react";
-import { useUser } from "../contexts/UserContext";
-import { Link } from "react-router-dom";
+import React from 'react'
+import { useUser } from '../contexts/UserContext'
+import { Link } from 'react-router-dom'
 
 export default function Dashboard() {
-  const { user } = useUser();
+  const { user } = useUser()
   return (
     <div className='dashboard'>
       <div>
@@ -13,9 +13,11 @@ export default function Dashboard() {
           <p>You are not Logged in</p>
         )}
       </div>
-      <div className='prompt'>
-        Play a game? <Link to='/play-online'>Play Online</Link>
-      </div>
+      {user && (
+        <div className='prompt'>
+          Play a game? <Link to='/play-online'>Play Online</Link>
+        </div>
+      )}
     </div>
-  );
+  )
 }
