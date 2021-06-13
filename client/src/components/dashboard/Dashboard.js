@@ -14,7 +14,7 @@ export default function Dashboard() {
         )}
       </div>
       <div className='prompt'>
-        Play a game? <Link to='/login'>Play Online</Link>
+        Play a game? <Link to='/play-online'>Play Online</Link>
       </div>
     </div>
   );
