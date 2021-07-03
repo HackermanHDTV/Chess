@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import Axios from 'axios'
 import { Link, useHistory } from 'react-router-dom'
+require('dotenv').config()
 
 import { useUser } from '../contexts/UserContext'
 
@@ -31,7 +32,7 @@ export default function Login() {
 
     Axios({
       method: 'POST',
-      url: 'https://chess-hdtv.herokuapp.com:26031/api/login',
+      url: `${process.env.SERVER_API}/api/login`,
       data: {
         username: usernameRef.current.value,
         password: passwordRef.current.value,
