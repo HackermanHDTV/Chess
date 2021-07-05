@@ -2,6 +2,8 @@ import Axios from 'axios'
 import React, { useEffect, useContext, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 
+require('dotenv').config()
+
 const UserContext = React.createContext()
 
 export function useUser() {
@@ -33,7 +35,7 @@ export function UserProvider({ children }) {
       Axios({
         method: 'GET',
         params: { id: loggedInUserId },
-        url: `http://192.168.1.9:5000/api/user`,
+        url: `https://chess-hdtv.herokuapp.com/api/user`,
       })
         .then((res) => {
           setUser(res.data)

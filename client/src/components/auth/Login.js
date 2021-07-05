@@ -32,7 +32,7 @@ export default function Login() {
 
     Axios({
       method: 'POST',
-      url: `${process.env.SERVER_API}/api/login`,
+      url: `https://chess-hdtv.herokuapp.com/api/login`,
       data: {
         username: usernameRef.current.value,
         password: passwordRef.current.value,
@@ -44,6 +44,7 @@ export default function Login() {
       })
       .catch((err) => {
         setError('Could not log in')
+        console.log('https://chess-hdtv.herokuapp.com')
         clearFields()
         setIsLoading(false)
         console.error(err)

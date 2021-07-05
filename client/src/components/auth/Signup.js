@@ -40,7 +40,7 @@ export default function Login() {
 
     Axios({
       method: 'POST',
-      url: `${process.env.SERVER_API}/api/signup`,
+      url: `https://chess-hdtv.herokuapp.com/api/signup`,
       data: {
         username: usernameRef.current.value,
         password: passwordRef.current.value,

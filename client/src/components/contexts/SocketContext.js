@@ -34,7 +34,9 @@ export function SocketProvider({ children }) {
   }, [state.played])
 
   useEffect(() => {
-    const newSocket = io(process.env.SERVER_API, { query: { id: user._id } })
+    const newSocket = io('https://chess-hdtv.herokuapp.com', {
+      query: { id: user._id },
+    })
 
     setSocket(newSocket)
 
