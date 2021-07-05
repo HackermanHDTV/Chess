@@ -1,12 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react'
 import Axios from 'axios'
 import { Link, useHistory } from 'react-router-dom'
-require('dotenv').config()
 
 import { useUser } from '../contexts/UserContext'
 
 import userLogo from '../../assets/user.svg'
 import lock from '../../assets/lock.svg'
+require('dotenv').config()
 
 export default function Login() {
   const usernameRef = useRef()
