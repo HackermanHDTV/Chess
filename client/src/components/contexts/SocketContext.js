@@ -34,7 +34,7 @@ export function SocketProvider({ children }) {
   }, [state.played])
 
   useEffect(() => {
-    const newSocket = io('http://192.168.1.9:5000', { query: { id: user._id } })
+    const newSocket = io(process.env.SERVER_API, { query: { id: user._id } })
 
     setSocket(newSocket)
 
