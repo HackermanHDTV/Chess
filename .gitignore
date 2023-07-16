@@ -11,6 +11,8 @@ client/coverage
 # production
 client/build
 
+server/build
+
 # misc
 .DS_Store
 .env

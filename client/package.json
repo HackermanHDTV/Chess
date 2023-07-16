@@ -2,6 +2,10 @@
   "name": "sockets",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "16.19.1",
+    "npm": "8.19.3"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^5.13.0",
     "@testing-library/react": "^11.2.7",

@@ -35,7 +35,7 @@ export function UserProvider({ children }) {
       Axios({
         method: 'GET',
         params: { id: loggedInUserId },
-        url: `https://chess-hdtv.herokuapp.com/api/user`,
+        url: `${process.env.REACT_APP_SERVER_URL}/api/user`,
       })
         .then((res) => {
           setUser(res.data)

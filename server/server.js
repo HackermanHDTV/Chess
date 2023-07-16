@@ -5,11 +5,12 @@ require('dotenv').config()
 const port = process.env.PORT || 5000
 const mongoose = require('mongoose')
 const app = express()
+const path = require("path")
 const server = http.createServer(app)
 const { Server } = require('socket.io')
 const io = new Server(server, {
   cors: {
-    origin: process.env.CLIENT_API,
+    origin: process.env.CLIENT_URL,
   },
 })
 
@@ -20,10 +21,10 @@ const { getPGN, savePGN } = require('./util/PGNroute.js')
 
 mongoose.connect(
   process.env.MONGODB_SRV,
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  },
+    { 
+        dbName: "test",
+        useNewUrlParser: true
+    },
   () => {
     console.log('Mongoose connected!')
   }
@@ -61,7 +62,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(
   cors({
-    origin: process.env.CLIENT_API,
+    origin: process.env.CLIENT_URL,
     credentials: true,
   })
 )
@@ -74,6 +75,12 @@ app.get('/api/user', getUser)
 // PGN routes
 app.get('/api/getPGN/:id', getPGN)
 app.post('/api/postPGN', savePGN)
+
+app.use(express.static(path.join(__dirname, "build")))
+
+app.get("/*", (_, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+})
 
 server.listen(port, '0.0.0.0', () => {
   console.log(`Server is listening on port ${port}`)

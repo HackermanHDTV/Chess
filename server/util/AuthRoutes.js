@@ -10,14 +10,18 @@ const getUser = (req, res) => {
 			res.status(200).send(doc)
 		})
 		.catch((err) => {
-			throw err
+            console.error("ERROR: ", err)
+            console.error("ERROR HAI GET USER MEIN!");
+            return res.status(500).send("FAIL!");
 		})
 }
 
 const userLogin = (req, res) => {
 	User.findOne({ username: req.body.username }, (err, doc) => {
 		if (err) {
-			throw err
+            console.error("ERROR: ", err)
+            console.error("ERROR HAI LOG MEIN!");
+            return res.status(500).send("FAIL!");
 		}
 		if (!doc) {
 			res.status(500).send('Invalid!!')
@@ -39,7 +43,9 @@ const userLogin = (req, res) => {
 const userSignUp = (req, res) => {
 	User.findOne({ username: req.body.username }, async (err, doc) => {
 		if (err) {
-			throw err
+            console.error("ERROR: ", err)
+            console.error("ERROR HAI SINGUP MEIN!");
+            return res.status(500).send("FAIL!");
 		}
 		if (doc) {
 			res.status(422).send('username in use!')
