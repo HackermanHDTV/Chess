@@ -1,5 +1,7 @@
 {
     "version": 2,
+    "buildCommand": "export NODE_OPTIONS=--openssl-legacy-provider && export CI=false && cd client && npm run build && mv build ../server",
+    "installCommand": "export NODE_OPTIONS=--openssl-legacy-provider && cd client && npm i && cd ../server && npm i",
     "builds": [
         {
             "src": "server/index.js",
