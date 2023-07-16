@@ -2,7 +2,7 @@
 
 An Interactive platform to play chess with friends online!
 
-Check out the deployed version: <a href="https://chess-hdtv.netlify.app/">HDTV Chess</a>
+Check out the deployed version: [HDTV Chess](https://chess-hdtv.vercel.app/)
 
 # Technologies Used
 
@@ -35,7 +35,7 @@ Check out the deployed version: <a href="https://chess-hdtv.netlify.app/">HDTV C
 
 # Collaborators
 
-1. **H**ardik Arora (@hardikarora24)
-2. **D**inesh Chukkala (@HumanChwan)
-3. **T**anishq Arora (@Tintintani)
-4. **V**ivek Ranjan (@VivekRanjan94)
+1. **H**ardik Arora ([@hardikarora24](https://github.com/hardikarora24))
+2. **D**inesh Chukkala ([@HumanChwan](https://github.com/HumanChwan))
+3. **T**anishq Arora ([@Tintintani](https://github.com/Tintintani))
+4. **V**ivek Ranjan ([@VivekRanjan94](https://github.com/VivekRanjan94))
