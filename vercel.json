@@ -13,7 +13,7 @@
     "routes": [
         {
             "src": "/(.*\\..*)",
-            "dest": "public/$1"
+            "dest": "server/build/$1"
         },
         {
             "src": "/(.*)",
